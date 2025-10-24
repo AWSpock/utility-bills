@@ -1,0 +1,56 @@
+form.inline {
+  display: inline;
+}
+
+button.link {
+  padding: 0.5rem 0.75rem;
+}
+
+.bill-types {
+  display: grid;
+}
+
+.options {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+.options a:not(.button) {
+  padding: 1rem;
+}
+
+.gauges {
+  margin-top: 1rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 1.5rem;
+  row-gap: 1.5rem;
+}
+
+@media only screen and (min-width: 768px) {
+  .main-form,
+  .error-message {
+    grid-column: 1 / 10;
+  }
+}
+@media only screen and (min-width: 1024px) {
+  .main-form,
+  .error-message {
+    grid-column: 1 / 8;
+  }
+  .bill-types {
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 1rem;
+  }
+}
+@media only screen and (min-width: 1280px) {
+  .main-form,
+  .error-message {
+    grid-column: 1 / 6;
+  }
+}
+@media only screen and (min-width: 1580px) {
+  .main-form,
+  .error-message {
+    grid-column: 1 / 5;
+  }
+}
