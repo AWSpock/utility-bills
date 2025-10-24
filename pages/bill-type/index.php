@@ -62,11 +62,11 @@
 							</div>
 							<div class="data-table-cell" data-id="created">
 								<div class="data-table-cell-label">Create</div>
-								<div class="data-table-cell-content"><?php echo $recBillType->created(); ?></div>
+								<div class="data-table-cell-content" data-dateformatter><?php echo $recBillType->created(); ?></div>
 							</div>
 							<div class="data-table-cell" data-id="updated">
 								<div class="data-table-cell-label">Updated</div>
-								<div class="data-table-cell-content"><?php echo $recBillType->updated(); ?></div>
+								<div class="data-table-cell-content" data-dateformatter><?php echo $recBillType->updated(); ?></div>
 							</div>
 						</a>
 					</tr>

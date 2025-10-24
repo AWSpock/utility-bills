@@ -95,11 +95,11 @@
                         </div>
                         <div class="data-table-cell" data-id="created">
                             <div class="data-table-cell-label">Create</div>
-                            <div class="data-table-cell-content"><?php echo $recBill->created(); ?></div>
+                            <div class="data-table-cell-content" data-dateformatter><?php echo $recBill->created(); ?></div>
                         </div>
                         <div class="data-table-cell" data-id="updated">
                             <div class="data-table-cell-label">Updated</div>
-                            <div class="data-table-cell-content"><?php echo $recBill->updated(); ?></div>
+                            <div class="data-table-cell-content" data-dateformatter><?php echo $recBill->updated(); ?></div>
                         </div>
                         <?php
                         if ($recAddress->isOwner() || $recAddress->isManager()) {

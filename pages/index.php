@@ -43,11 +43,11 @@
 					</div>
 					<div class="data-table-cell" data-id="created">
 						<div class="data-table-cell-label">Create</div>
-						<div class="data-table-cell-content"><?php echo $recAddress->created(); ?></div>
+						<div class="data-table-cell-content" data-dateformatter><?php echo $recAddress->created(); ?></div>
 					</div>
 					<div class="data-table-cell" data-id="updated">
 						<div class="data-table-cell-label">Updated</div>
-						<div class="data-table-cell-content"><?php echo $recAddress->updated(); ?></div>
+						<div class="data-table-cell-content" data-dateformatter><?php echo $recAddress->updated(); ?></div>
 					</div>
 				</a>
 			<?php

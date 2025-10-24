@@ -158,3 +158,5 @@ switch ($routeParser->ResourcePath()) {
 <?php
 IncludeJS($routeParser->ResourcePath());
 ?>
+
+<script src='/js/date-formatter.js'></script>
