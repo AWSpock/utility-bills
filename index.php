@@ -77,24 +77,28 @@ switch ($routeParser->ResourcePath()) {
                 <?php
                 if ($userAuth->checkToken()) {
                 ?>
-                    <li><a href="/logout"><i class="fa-solid fa-right-from-bracket" aria-hidden="true"></i>Log Out</a></li>
+                    <li><a href="//auth2.spockfamily.net/logout"><i class="fa-solid fa-right-from-bracket" aria-hidden="true"></i>Log Out</a></li>
                 <?php
                 } else {
                 ?>
-                    <li><a href="/login"><i class="fa-solid fa-right-to-bracket" aria-hidden="true"></i>Log In</a></li>
+                    <li><a href="//auth2.spockfamily.net/login?redirect=<?php echo urlencode($_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']); ?>"><i class="fa-solid fa-right-to-bracket" aria-hidden="true"></i>Log In</a></li>
                 <?php
                 }
                 ?>
             </ul>
-            <hr />
-            <ul>
-                <?php
-                $file = "/var/www/utility-bills/menu.php";
-                if (file_exists($file)) {
+            <?php
+            $file = "/var/www/utility-bills/menu.php";
+            if (file_exists($file)) {
+            ?>
+                <hr />
+                <ul>
+                    <?php
                     include($file);
-                }
-                ?>
-            </ul>
+                    ?>
+                </ul>
+            <?php
+            }
+            ?>
         </div>
     </div>
 

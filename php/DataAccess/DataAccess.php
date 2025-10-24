@@ -8,8 +8,8 @@ class DataAccess
 {
     private $db;
     private $addressRepository = [];
-    private $BillTypeRepository = [];
-    private $BillRepository = [];
+    private $billTypeRepository = [];
+    private $billRepository = [];
 
     public function __construct(mysqli $db = null)
     {
@@ -26,18 +26,18 @@ class DataAccess
 
     public function bill_types($address_id)
     {
-        if (!array_key_exists($address_id, $this->BillTypeRepository)) {
-            $this->BillTypeRepository[$address_id] = new BillTypeRepository($this->db, $address_id);
+        if (!array_key_exists($address_id, $this->billTypeRepository)) {
+            $this->billTypeRepository[$address_id] = new BillTypeRepository($this->db, $address_id);
         }
-        return $this->BillTypeRepository[$address_id];
+        return $this->billTypeRepository[$address_id];
     }
 
     public function bills($address_id, $bill_type_id)
     {
-        if (!array_key_exists($address_id . "-" . $bill_type_id, $this->BillRepository)) {
-            $this->BillRepository[$bill_type_id] = new BillRepository($this->db, $address_id, $bill_type_id);
+        if (!array_key_exists($address_id . "-" . $bill_type_id, $this->billRepository)) {
+            $this->billRepository[$bill_type_id] = new BillRepository($this->db, $address_id, $bill_type_id);
         }
-        return $this->BillRepository[$bill_type_id];
+        return $this->billRepository[$bill_type_id];
     }
 
     //

@@ -288,12 +288,12 @@ class UserAuth
 
     public function sendLogin()
     {
-        header('Location: /login?redirect=' . $_SERVER['REQUEST_URI']);
+        header('Location: //auth2.spockfamily.net/login?redirect=' . urlencode($_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']));
         die();
     }
     public function sendUnauthorized()
     {
-        header('Location: /unauthorized');
+        header('Location: //auth2.spockfamily.net/unauthorized');
         die();
     }
 }
