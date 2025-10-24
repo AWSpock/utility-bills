@@ -97,14 +97,6 @@ class RouteParser
 
 
         /* basic */
-        if (preg_match("~^/login$~", $this->request)) {
-            $this->resourcePath = "/login";
-            return;
-        }
-        if (preg_match("~^/logout$~", $this->request)) {
-            $this->resourcePath = "/logout";
-            return;
-        }
         if (preg_match("~^/error$~", $this->request)) {
             $this->resourcePath = "/error";
             return;

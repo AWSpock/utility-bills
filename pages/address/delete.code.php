@@ -2,7 +2,7 @@
 
 $addressData = $data->addresses($userAuth->user()->id());
 
-$recAddress = $data->addresses($userAuth->user()->id())->getRecordById($address_id);
+$recAddress = $addressData->getRecordById($address_id);
 if ($recAddress->id() < 0) {
     header('Location: /');
     die();
