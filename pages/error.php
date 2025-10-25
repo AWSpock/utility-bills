@@ -10,16 +10,18 @@
 </nav>
 
 <div class="content">
-	<?php
-	if (isset($_GET['message'])) {
-	?>
-		<p>Message: <?php echo htmlspecialchars($_GET['message']); ?></p>
-	<?php
-	}
-	if (isset($_GET['route'])) {
-	?>
-		<p>Route: <?php echo htmlspecialchars($_GET['route']); ?></p>
-	<?php
-	}
-	?>
+	<div class="row">
+		<?php
+		if (isset($_GET['message'])) {
+		?>
+			<p>Message: <?php echo htmlspecialchars($_GET['message']); ?></p>
+		<?php
+		}
+		if (isset($_GET['route'])) {
+		?>
+			<p>Route: <?php echo htmlspecialchars($_GET['route']); ?></p>
+		<?php
+		}
+		?>
+	</div>
 </div>
