@@ -1,45 +1,8 @@
-.content {
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  grid-template-rows: max-content auto 1fr;
-}
-
-.row {
-  grid-column: 1 / 13;
-}
-
-.row .canvas {
-  min-height: 15rem;
-}
-
-.data-table {
-  display: grid;
-  row-gap: 1rem;
-}
 .data-table-row {
-  display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-template-areas:
     "street street street favorite"
     "created created updated updated";
-  column-gap: 0.25rem;
-  row-gap: 0.25rem;
-  border: 1px solid var(--secondary-background-color);
-  border-radius: 0.4rem;
-  padding: 0.5rem;
-}
-.data-table-row:hover {
-  background-color: var(--secondary-background-color);
-}
-a.data-table-row {
-  color: var(--primary-text-color);
-}
-a.data-table-row:hover {
-  text-decoration: none;
-}
-.data-table-row.header-row {
-  display: none;
-  background-color: var(--tertiary-background-color);
 }
 
 .data-table-cell[data-id="street"] {
@@ -55,36 +18,18 @@ a.data-table-row:hover {
   grid-area: updated;
 }
 
-.data-table-cell .data-table-cell-label {
-  font-weight: 600;
-}
-
 @media only screen and (min-width: 768px) {
 }
 @media only screen and (min-width: 1024px) {
   .data-table {
     max-width: 1000px;
-    row-gap: 0.5rem;
-  }
-  .data-table-row.header-row {
-    display: grid;
-  }
-  .data-table-row:not(.header-row) .data-table-cell-label {
-    display: none;
   }
   .data-table-row {
-    display: grid;
     grid-template-columns: minmax(100px, auto) 1fr 1fr 1fr;
     grid-template-areas: "favorite street created updated";
   }
 }
 @media only screen and (min-width: 1280px) {
-  .row .canvas {
-    max-width: 80%;
-    margin-left: auto;
-    margin-right: auto;
-    min-height: 20rem;
-  }
 }
 @media only screen and (min-width: 1580px) {
 }

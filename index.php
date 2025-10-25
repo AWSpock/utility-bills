@@ -56,6 +56,8 @@ switch ($routeParser->ResourcePath()) {
     <link href='https://fonts.googleapis.com/css?family=Comfortaa' rel='stylesheet' type='text/css'>
     <script src="https://kit.fontawesome.com/d3431fa995.js" crossorigin="anonymous"></script>
 
+    <link rel='stylesheet' type='text/css' href='/css/common.css' />
+
     <?php
     IncludeCSS($routeParser->CSS());
     ?>
