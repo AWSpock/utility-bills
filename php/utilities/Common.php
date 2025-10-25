@@ -17,22 +17,16 @@
 
 function IncludeCSS($file)
 {
-    // $file = ReturnCurrentPath();
-    $full = "/css" . $file . ".css";
-
-    if (file_exists("/var/www/utility-bills" . $full)) {
-        $v = filemtime("/var/www/utility-bills" . $full);
-        echo "<link rel='stylesheet' type='text/css' href='//utility-bills.spockfamily.net" . $full . "?v=" . $v . "' />\n";
+    if (file_exists("/var/www/utility-bills" . $file)) {
+        $v = filemtime("/var/www/utility-bills" . $file);
+        echo "<link rel='stylesheet' type='text/css' href='//utility-bills.spockfamily.net" . $file . "?v=" . $v . "' />\n";
     }
 }
 function IncludeJS($file)
 {
-    // $file = ReturnCurrentPath();
-    $full = "/js" . $file . ".js";
-
-    if (file_exists("/var/www/utility-bills" . $full)) {
-        $v = filemtime("/var/www/utility-bills" . $full);
-        echo "<script src='//utility-bills.spockfamily.net" . $full . "?v=" . $v . "'></script>\n";
+    if (file_exists("/var/www/utility-bills" . $file)) {
+        $v = filemtime("/var/www/utility-bills" . $file);
+        echo "<script src='//utility-bills.spockfamily.net" . $file . "?v=" . $v . "'></script>\n";
     }
 }
 

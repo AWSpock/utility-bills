@@ -123,6 +123,18 @@ class RouteParser
             return "";
         return $this->siteDir . $this->basePath . $this->resourcePath . ".code.php";;
     }
+    function CSS()
+    {
+        if ($this->resourcePath == "")
+            return "";
+        return $this->basePath . $this->resourcePath . ".php.css";
+    }
+    function JS()
+    {
+        if ($this->resourcePath == "")
+            return "";
+        return $this->basePath . $this->resourcePath . ".php.js";
+    }
     function ResourcePath()
     {
         return $this->resourcePath;

@@ -57,7 +57,7 @@ switch ($routeParser->ResourcePath()) {
     <script src="https://kit.fontawesome.com/d3431fa995.js" crossorigin="anonymous"></script>
 
     <?php
-    IncludeCSS($routeParser->ResourcePath());
+    IncludeCSS($routeParser->CSS());
     ?>
 
     <script type="text/javascript"></script>
@@ -156,7 +156,7 @@ switch ($routeParser->ResourcePath()) {
 <script src='https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/3.1.0/chartjs-plugin-annotation.min.js'></script>
 
 <?php
-IncludeJS($routeParser->ResourcePath());
+IncludeJS($routeParser->JS());
 ?>
 
 <script src='/js/date-formatter.js'></script>
