@@ -10,5 +10,7 @@
 </nav>
 
 <div class="content">
-	<p>You are not authorized for this utility. Please contact <a href="mailto:awspock@gmail.com?subject=Unauthorized Access">Alex</a> if you think this message is in error.</p>
+	<div class="row">
+		<p>You are not authorized for this utility. Please contact <a href="mailto:awspock@gmail.com?subject=Unauthorized Access">Alex</a> if you think this message is in error.</p>
+	</div>
 </div>
