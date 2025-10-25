@@ -18,11 +18,14 @@ class UserAuth
     protected $checkToken;
     protected $checkUtility;
 
+    protected $utility;
+
     public function __construct()
     {
         $env = parse_ini_file(__DIR__ . '/.envAuth');
         $this->cookie = new SecureCookie($env['COOKIE_ENCRYPTION_KEY'], $env['COOKIE_HMAC_KEY']);
         $this->db = new DatabaseV2(parse_ini_file(__DIR__ . '/.envAuth'));
+        $this->utility = $env['UTILITY'];
     }
 
     private function getUserData(string $email)
@@ -228,8 +231,6 @@ class UserAuth
 
     public function checkUtility()
     {
-        $utility = "utility-bills.spockfamily.net";
-
         if (isset($this->checkUtility))
             return $this->checkUtility;
         $this->checkUtility = false;
@@ -247,7 +248,7 @@ class UserAuth
 
         $result = $this->db->query($sql, [
             $this->user->id(),
-            $utility
+            $this->utility
         ], "is");
 
         if ($result) {
