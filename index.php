@@ -127,6 +127,10 @@ switch ($routeParser->ResourcePath()) {
             error_log("Other Error: " . $ex->getMessage(), 0);
             header("Location: /error?message=" . $ex->getMessage() . "&route=" . urlencode($routeParser->Request()));
             die();
+        } catch (Throwable $ex) {
+            error_log("Major Error: " . $ex->getMessage(), 0);
+            header("Location: /error?message=" . $ex->getMessage() . "&route=" . urlencode($routeParser->Request()));
+            die();
         }
     } else {
         http_response_code(404);
