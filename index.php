@@ -3,10 +3,6 @@
 include_once("/var/www/utility-bills/php/utilities/Common.php");
 include_once("/var/www/utility-bills/php/utilities/RouteParser.php");
 
-// include_once("/var/www/utility-bills/php/data/AddressMapper.php");
-// include_once("/var/www/utility-bills/php/data/BillTypeMapper.php");
-// include_once("/var/www/utility-bills/php/data/BillMapper.php");
-
 include_once("/var/www/utility-bills/php/DataAccess/UserAuth.php");
 include_once("/var/www/utility-bills/php/DataAccess/DataAccess.php");
 

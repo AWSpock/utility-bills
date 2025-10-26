@@ -18,7 +18,7 @@ class BillType
         $this->updated = !empty($rec['updated']) ? $rec['updated'] : null;
         $this->name = !empty($rec['name']) ? $rec['name'] : null;
         $this->unit = !empty($rec['unit']) ? $rec['unit'] : null;
-        $this->precision = !empty($rec['precision']) ? $rec['precision'] : 0;
+        $this->precision = !empty($rec['precision']) ? intval($rec['precision']) : 0;
     }
 
     public static function fromPost($post)

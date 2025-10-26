@@ -1,41 +1,57 @@
 <?php
-include_once("/var/www/utility-bills/php/data/UserAuth.php");
+
+include_once("/var/www/utility-bills/php/utilities/Common.php");
+include_once("/var/www/utility-bills/php/utilities/RouteParser.php");
+
+include_once("/var/www/utility-bills/php/DataAccess/UserAuth.php");
+include_once("/var/www/utility-bills/php/DataAccess/DataAccess.php");
 
 $userAuth = new UserAuth();
+$routeParser = new RouteParser("api");
+$data = new DataAccess();
+session_start();
 
-if (!$userAuth->checkToken() || !$userAuth->checkUtility()) {
-    echo "Unauthorized";
-    die();
-}
+switch ($routeParser->ResourcePath()) {
+    case "/public":
+        break;
+    default:
+        if (!$userAuth->checkToken() || !$userAuth->checkUtility()) {
+            http_response_code(401);
+            echo "Unauthorized";
+            die();
+        }
 
-$apiDir = "/api";
-$siteDir = $_SERVER['DOCUMENT_ROOT'];
-
-$request = $_SERVER['REDIRECT_URL'];
-$requestParts = explode("/", $request);
-
-switch ($request) {
-    case "/api/cash_back":
-        $pagePath = "/cashback.php";
+        $uriparts = explode("/", $_SERVER['REQUEST_URI']);
+        if (array_key_exists(2, $uriparts))
+            $address_id = explode("/", $_SERVER['REQUEST_URI'])[3];
+        if (array_key_exists(4, $uriparts))
+            $billtype_id = explode("/", $_SERVER['REQUEST_URI'])[5];
+        if (array_key_exists(6, $uriparts))
+            $bill_id = explode("/", $_SERVER['REQUEST_URI'])[7];
         break;
 }
 
-if ($pagePath != "") {
-    $fileExists = true;
-    $pagePath = $siteDir . $apiDir . $pagePath;
-}
-
-if ($fileExists) {
+if (file_exists($routeParser->PagePath())) {
     try {
-        require $pagePath;
+        header('Content-Type: application/json; charset=utf-8');
+        require $routeParser->PagePath();
+    } catch (DatabaseException $ex) {
+        http_response_code(500);
+        error_log("Database Error: " . $ex->getMessage(), 0);
+        echo "Database Error: " . $ex->getMessage();
+        die();
     } catch (Exception $ex) {
         http_response_code(500);
-        echo "Error: " . $ex->getMessage();
-        // header("Location: /error?message=" . $ex->getMessage() . "&route=" . urlencode($request));
+        error_log("Other Error: " . $ex->getMessage(), 0);
+        echo "Other Error: " . $ex->getMessage();
+        die();
+    } catch (Throwable $ex) {
+        http_response_code(500);
+        error_log("Major Error: " . $ex->getMessage(), 0);
+        echo "Major Error: " . $ex->getMessage();
         die();
     }
 } else {
     http_response_code(404);
     echo "Not Found";
-    // require $siteDir . $viewDir . "/404.php";
 }

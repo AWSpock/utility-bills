@@ -19,8 +19,8 @@ class Bill
         $this->bill_date = !empty($rec['bill_date']) ? $rec['bill_date'] : null;
         $this->from_date = !empty($rec['from_date']) ? $rec['from_date'] : null;
         $this->to_date = !empty($rec['to_date']) ? $rec['to_date'] : null;
-        $this->unit = !empty($rec['unit']) ? $rec['unit'] : null;
-        $this->price = !empty($rec['price']) ? $rec['price'] : null;
+        $this->unit = !empty($rec['unit']) ? floatval($rec['unit']) : null;
+        $this->price = !empty($rec['price']) ? floatval($rec['price']) : null;
     }
 
     public static function fromPost($post)

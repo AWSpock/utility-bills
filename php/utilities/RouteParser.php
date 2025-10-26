@@ -13,21 +13,22 @@ class RouteParser
 
     public function __construct($type = "view")
     {
+        $this->siteDir = $_SERVER['DOCUMENT_ROOT'];
+        $this->request = $_SERVER['REDIRECT_URL'];
+
         switch (strtolower($type)) {
             case "view":
                 $this->basePath = "/pages";
+                $this->ValidateRoute();
                 break;
             case "api":
+                $this->basePath = "/api";
+                $this->ValidateAPIRoute();
                 break;
             default:
                 throw new Exception("Invalid RouteParser Type");
                 break;
         }
-
-        $this->siteDir = $_SERVER['DOCUMENT_ROOT'];
-        $this->request = $_SERVER['REDIRECT_URL'];
-
-        $this->ValidateRoute();
     }
 
     protected function ValidateRoute()
@@ -103,6 +104,18 @@ class RouteParser
         }
         if (preg_match("~^/unauthorized$~", $this->request)) {
             $this->resourcePath = "/unauthorized";
+            return;
+        }
+    }
+
+    protected function ValidateAPIRoute()
+    {
+        if (preg_match("~^/api/address/(\d+)/bill-type/(\d+)/bill$~", $this->request)) {
+            $this->resourcePath = "/bill";
+            return;
+        }
+        if (preg_match("~^/api/address/(\d+)/bill-type/(\d+)/bill/(\d+)$~", $this->request)) {
+            $this->resourcePath = "/bill";
             return;
         }
     }
