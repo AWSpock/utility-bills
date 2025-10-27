@@ -110,14 +110,14 @@ class RouteParser
 
     protected function ValidateAPIRoute()
     {
-        // if (preg_match("~^/api/address$~", $this->request)) {
-        //     $this->resourcePath = "/address";
-        //     return;
-        // }
-        // if (preg_match("~^/api/address/(\d+)$~", $this->request)) {
-        //     $this->resourcePath = "/address";
-        //     return;
-        // }
+        if (preg_match("~^/api/address$~", $this->request)) {
+            $this->resourcePath = "/address";
+            return;
+        }
+        if (preg_match("~^/api/address/(\d+)$~", $this->request)) {
+            $this->resourcePath = "/address";
+            return;
+        }
 
         if (preg_match("~^/api/address/(\d+)/bill-type/(\d+)/bill$~", $this->request)) {
             $this->resourcePath = "/bill";

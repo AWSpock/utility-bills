@@ -14,7 +14,7 @@
 	</div>
 	<div class="row">
 		<p>Record Count: <span id="data-table-count">?</span></p>
-		<div class="data-table">
+		<div class="data-table" id="data-table">
 			<div class="data-table-row header-row">
 				<div class="data-table-cell header-cell" data-id="favorite">
 					<div class="data-table-cell-label">Favorite</div>

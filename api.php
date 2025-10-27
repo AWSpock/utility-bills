@@ -11,8 +11,6 @@ $routeParser = new RouteParser("api");
 $data = new DataAccess();
 session_start();
 
-error_log("TEST",0);
-
 switch ($routeParser->ResourcePath()) {
     case "/public":
         break;
@@ -24,16 +22,14 @@ switch ($routeParser->ResourcePath()) {
         }
 
         $uriparts = explode("/", $_SERVER['REQUEST_URI']);
-        if (array_key_exists(2, $uriparts))
+        if (array_key_exists(3, $uriparts))
             $address_id = explode("/", $_SERVER['REQUEST_URI'])[3];
-        if (array_key_exists(4, $uriparts))
+        if (array_key_exists(5, $uriparts))
             $billtype_id = explode("/", $_SERVER['REQUEST_URI'])[5];
-        if (array_key_exists(6, $uriparts))
+        if (array_key_exists(7, $uriparts))
             $bill_id = explode("/", $_SERVER['REQUEST_URI'])[7];
         break;
 }
-
-error_log("Path: " . $routeParser->PagePath(), 0);
 
 if (file_exists($routeParser->PagePath())) {
     try {
