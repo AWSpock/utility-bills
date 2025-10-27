@@ -1,6 +1,6 @@
-function ready(fn) {
+async function ready(fn) {
   if (document.readyState !== "loading") {
-    fn();
+    await fn();
     return;
   }
   document.addEventListener("DOMContentLoaded", fn);
