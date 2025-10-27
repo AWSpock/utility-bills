@@ -14,5 +14,3 @@ if ($recBillType->id() < 0) {
     header('Location: /address/' . $recAddress->id() . '/bill-type');
     die();
 }
-
-// $recBillType->store_bills($data->bills($recAddress->id(), $recBillType->id())->getRecords());
