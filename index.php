@@ -44,6 +44,7 @@ switch ($routeParser->ResourcePath()) {
     <link rel='stylesheet' type='text/css' href='//cdn.spockfamily.net/v2/css/modal.css' />
     <link rel='stylesheet' type='text/css' href='//cdn.spockfamily.net/v2/css/gauge.css' />
     <link rel='stylesheet' type='text/css' href='//cdn.spockfamily.net/v2/css/filter.css' />
+    <link rel='stylesheet' type='text/css' href='//cdn.spockfamily.net/v2/css/loading.css' />
 
     <title>Utility Bills | Spockfamily</title>
 
@@ -52,9 +53,8 @@ switch ($routeParser->ResourcePath()) {
     <link href='https://fonts.googleapis.com/css?family=Comfortaa' rel='stylesheet' type='text/css'>
     <script src="https://kit.fontawesome.com/d3431fa995.js" crossorigin="anonymous"></script>
 
-    <link rel='stylesheet' type='text/css' href='/css/common.css' />
-
     <?php
+    IncludeCSS("/css/common.css");
     IncludeCSS($routeParser->CSS());
     ?>
 
@@ -147,18 +147,19 @@ switch ($routeParser->ResourcePath()) {
     </div>
     </div>
     <div id="PopupNotificationContainer"></div>
+    <div id="Loader"></div>
 
 </body>
 
 <script src='//cdn.spockfamily.net/v2/js/menu.js'></script>
 <script src='//cdn.spockfamily.net/v2/js/layout.js'></script>
 <script src='//cdn.spockfamily.net/v2/js/popup-notification.js'></script>
+<script src='//cdn.spockfamily.net/v2/js/loading.js'></script>
 
 <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/3.1.0/chartjs-plugin-annotation.min.js'></script>
 
 <?php
+IncludeJS("/js/common.js");
 IncludeJS($routeParser->JS());
 ?>
-
-<script src='/js/date-formatter.js'></script>

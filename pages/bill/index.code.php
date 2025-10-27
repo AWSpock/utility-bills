@@ -15,4 +15,4 @@ if ($recBillType->id() < 0) {
     die();
 }
 
-$recBillType->store_bills($data->bills($recAddress->id(), $recBillType->id())->getRecords());
+// $recBillType->store_bills($data->bills($recAddress->id(), $recBillType->id())->getRecords());
