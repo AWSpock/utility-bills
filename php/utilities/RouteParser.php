@@ -119,6 +119,15 @@ class RouteParser
             return;
         }
 
+        if (preg_match("~^/api/address/(\d+)/bill-type$~", $this->request)) {
+            $this->resourcePath = "/bill-type";
+            return;
+        }
+        if (preg_match("~^/api/address/(\d+)/bill-type/(\d+)$~", $this->request)) {
+            $this->resourcePath = "/bill-type";
+            return;
+        }
+
         if (preg_match("~^/api/address/(\d+)/bill-type/(\d+)/bill$~", $this->request)) {
             $this->resourcePath = "/bill";
             return;

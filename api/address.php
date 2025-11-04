@@ -3,7 +3,7 @@
 switch ($_SERVER["REQUEST_METHOD"]) {
     case "GET":
         if (isset($address_id)) {
-            echo $data->addresses($recAddress->id())->getRecordById($address_id)->toString();
+            echo $data->addresses($userAuth->user()->id())->getRecordById($address_id)->toString();
         } else {
             $recs = [];
             foreach ($data->addresses($userAuth->user()->id())->getRecords() as $rec) {
