@@ -13,14 +13,14 @@ class Bill
 
     public function __construct($rec = null)
     {
-        $this->id = !empty($rec['id']) ? $rec['id'] : -1;
-        $this->created = !empty($rec['created']) ? $rec['created'] : null;
-        $this->updated = !empty($rec['updated']) ? $rec['updated'] : null;
-        $this->bill_date = !empty($rec['bill_date']) ? $rec['bill_date'] : null;
-        $this->from_date = !empty($rec['from_date']) ? $rec['from_date'] : null;
-        $this->to_date = !empty($rec['to_date']) ? $rec['to_date'] : null;
-        $this->unit = !empty($rec['unit']) ? floatval($rec['unit']) : null;
-        $this->price = !empty($rec['price']) ? floatval($rec['price']) : null;
+        $this->id = (array_key_exists("id", $rec) && $rec['id'] !== NULL) ? $rec['id'] : -1;
+        $this->created = (array_key_exists("created", $rec) && $rec['created'] !== NULL) ? $rec['created'] : null;
+        $this->updated = (array_key_exists("updated", $rec) && $rec['updated'] !== NULL) ? $rec['updated'] : null;
+        $this->bill_date = (array_key_exists("bill_date", $rec) && $rec['bill_date'] !== NULL) ? $rec['bill_date'] : null;
+        $this->from_date = (array_key_exists("from_date", $rec) && $rec['from_date'] !== NULL) ? $rec['from_date'] : null;
+        $this->to_date = (array_key_exists("to_date", $rec) && $rec['to_date'] !== NULL) ? $rec['to_date'] : null;
+        $this->unit = (array_key_exists("unit", $rec) && $rec['unit'] !== NULL) ? $rec['unit'] : null;
+        $this->price = (array_key_exists("price", $rec) && $rec['price'] !== NULL) ? $rec['price'] : null;
     }
 
     public static function fromPost($post)
@@ -51,7 +51,7 @@ class Bill
 
     public function id()
     {
-        return $this->id;
+        return intval($this->id);
     }
     public function created()
     {
@@ -79,14 +79,25 @@ class Bill
     }
     public function price()
     {
-        return $this->price;
+        return ($this->price === NULL) ? null : floatval($this->price);
     }
 
     public function toString($pretty = false)
     {
-        if ($pretty === true)
-            return json_encode(get_object_vars($this), JSON_PRETTY_PRINT);
+        $obj = (object) [
+            "id" => $this->id(),
+            "created" => $this->created(),
+            "updated" => $this->updated(),
+            "bill_date" => $this->bill_date(),
+            "from_date" => $this->from_date(),
+            "to_date" => $this->to_date(),
+            "unit" => $this->unit(),
+            "price" => $this->price()
+        ];
 
-        return json_encode(get_object_vars($this));
+        if ($pretty === true)
+            return json_encode(get_object_vars($obj), JSON_PRETTY_PRINT);
+
+        return json_encode(get_object_vars($obj));
     }
 }

@@ -64,8 +64,13 @@
                     if ($minPrice === null || $minPrice > $bill->price())
                         $minPrice = $bill->price();
                 }
-                $avgUnit = $totalUnit / count($recBillType->bills());
-                $avgPrice = $totalPrice / count($recBillType->bills());
+                if (count($recBillType->bills()) > 0) {
+                    $avgUnit = $totalUnit / count($recBillType->bills());
+                    $avgPrice = $totalPrice / count($recBillType->bills());
+                } else {
+                    $avgUnit = 0;
+                    $avgPrice = 0;
+                }
             ?>
                 <div class="bill-type">
                     <h2><?php echo $recBillType->name(); ?></h2>

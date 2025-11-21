@@ -23,15 +23,15 @@ if ($userAuth->checkToken()) {
                 $bill_types = $data->bill_types($address->id())->getRecords();
                 if (count($bill_types) > 0) {
             ?>
-                    <ul>
+                    <!-- <ul> -->
                         <?php
                         foreach ($bill_types as $bill_type) {
                         ?>
-                            <li><a href="/address/<?php echo $address->id(); ?>/bill-type/<?php echo $bill_type->id(); ?>/bill"><i></i><?php echo htmlentities($bill_type->name()); ?></a></li>
+                            <li class="menu-sub"><a href="/address/<?php echo $address->id(); ?>/bill-type/<?php echo $bill_type->id(); ?>/bill"><i></i><?php echo htmlentities($bill_type->name()); ?></a></li>
                         <?php
                         }
                         ?>
-                    </ul>
+                    <!-- </ul> -->
             <?php
                 }
             }

@@ -13,12 +13,12 @@ class BillType
 
     public function __construct($rec = null)
     {
-        $this->id = !empty($rec['id']) ? $rec['id'] : -1;
-        $this->created = !empty($rec['created']) ? $rec['created'] : null;
-        $this->updated = !empty($rec['updated']) ? $rec['updated'] : null;
-        $this->name = !empty($rec['name']) ? $rec['name'] : null;
-        $this->unit = !empty($rec['unit']) ? $rec['unit'] : null;
-        $this->precision = !empty($rec['precision']) ? intval($rec['precision']) : 0;
+        $this->id = (array_key_exists("id", $rec) && $rec['id'] !== NULL) ? $rec['id'] : -1;
+        $this->created = (array_key_exists("created", $rec) && $rec['created'] !== NULL) ? $rec['created'] : null;
+        $this->updated = (array_key_exists("updated", $rec) && $rec['updated'] !== NULL) ? $rec['updated'] : null;
+        $this->name = (array_key_exists("name", $rec) && $rec['name'] !== NULL) ? $rec['name'] : null;
+        $this->unit = (array_key_exists("unit", $rec) && $rec['unit'] !== NULL) ? $rec['unit'] : null;
+        $this->precision = (array_key_exists("precision", $rec) && $rec['precision'] !== NULL) ? $rec['precision'] : 0;
     }
 
     public static function fromPost($post)
@@ -45,7 +45,7 @@ class BillType
 
     public function id()
     {
-        return $this->id;
+        return intval($this->id);
     }
     public function created()
     {
@@ -65,7 +65,7 @@ class BillType
     }
     public function precision()
     {
-        return (int)$this->precision;
+        return intval($this->precision);
     }
     public function precisionDecimals()
     {
@@ -73,7 +73,7 @@ class BillType
         for ($x = 0; $x < $this->precision; $x++) {
             $num = $num / 10;
         }
-        return $num;
+        return floatval($num);
     }
     public function formatPrecision($num)
     {
@@ -82,10 +82,20 @@ class BillType
 
     public function toString($pretty = false)
     {
-        if ($pretty === true)
-            return json_encode(get_object_vars($this), JSON_PRETTY_PRINT);
+        $obj = (object) [
+            "id" => $this->id(),
+            "created" => $this->created(),
+            "updated" => $this->updated(),
+            "name" => $this->name(),
+            "unit" => $this->unit(),
+            "precision" => $this->precision()/*,
+            "precisionDecimals" => $this->precisionDecimals()*/
+        ];
 
-        return json_encode(get_object_vars($this));
+        if ($pretty === true)
+            return json_encode(get_object_vars($obj), JSON_PRETTY_PRINT);
+
+        return json_encode(get_object_vars($obj));
     }
 
     //
