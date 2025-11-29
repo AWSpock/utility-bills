@@ -25,6 +25,7 @@ samp {
   column-gap: 0.25rem;
   row-gap: 0.25rem;
   border: 1px solid var(--secondary-background-color);
+  background-color: var(--secondary-background-color);
   border-radius: 0.4rem;
   padding: 0.5rem;
 }

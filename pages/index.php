@@ -29,6 +29,8 @@
 					<div class="data-table-cell-label">Updated</div>
 				</div>
 			</div>
+			<h2 id="favorites">Favorites</h2>
+			<h2 id="others">Others</h2>
 		</div>
 	</div>
 </div>

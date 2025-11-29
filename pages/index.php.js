@@ -2,6 +2,8 @@ ready(loadData);
 
 async function loadData() {
   var table = document.getElementById("data-table");
+  var favorites = table.querySelector("#favorites");
+  var others = table.querySelector("#others");
   try {
     loader.show(true);
 
@@ -53,7 +55,11 @@ async function loadData() {
         '[data-id="updated"] .data-table-cell-content'
       ).textContent = i.updated;
 
-      table.appendChild(clone);
+      if (i.favorite == "Yes") {
+        table.insertBefore(clone, others);
+      } else {
+        table.appendChild(clone);
+      }
 
       x++;
     });
