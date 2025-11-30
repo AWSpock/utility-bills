@@ -87,7 +87,7 @@
             </div>
             <div class="data-table-cell" data-id="unit">
                 <div class="data-table-cell-label"><?php echo htmlentities($recBillType->unit()); ?></div>
-                <div class="data-table-cell-content"></div>
+                <div class="data-table-cell-content" data-numberformatter></div>
             </div>
             <div class="data-table-cell" data-id="price">
                 <div class="data-table-cell-label">Price</div>

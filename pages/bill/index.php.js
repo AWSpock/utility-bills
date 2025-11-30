@@ -79,6 +79,7 @@ async function loadData() {
     });
 
     convertDateFields();
+    convertNumberFields();
 
     loadChart();
   } catch (error) {
@@ -135,7 +136,7 @@ function loadChart() {
           x: {
             title: {
               display: true,
-              text: "Bills",
+              text: "Bills (To Date)",
             },
           },
         },

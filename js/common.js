@@ -26,6 +26,17 @@ function moneyFormat(amount) {
   }).format(amount);
 }
 
+function convertNumberFields() {
+  var numbersToConvert = document.querySelectorAll("[data-numberformatter]");
+
+  numbersToConvert.forEach(function (el) {
+    var onum = el.textContent;
+    el.textContent = new Intl.NumberFormat("en-US").format(onum);
+    el.removeAttribute("data-dateformatter");
+  });
+}
+ready(convertNumberFields);
+
 //
 
 var currentUrl = window.location.pathname;
