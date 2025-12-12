@@ -1,10 +1,14 @@
 <?php
 
-require_once("/var/www/utility-bills/php/DataAccess/DatabaseException.php");
+require_once("/var/www/warranty/php/DataAccess/DatabaseException.php");
 
 class DatabaseV2
 {
     private $conn;
+    protected $file_dir;
+    protected $sql;
+    protected $params;
+    protected $stmt;
 
     public function __construct($env = null)
     {
@@ -14,54 +18,110 @@ class DatabaseV2
             $env = parse_ini_file(__DIR__ . '/.env');
 
         try {
-            $this->conn = new mysqli($env['DB_HOST'], $env["DB_USER"], $env["DB_PASS"], $env["DB_NAME"]);
+            $this->conn = new mysqli($env["DB_HOST"], $env["DB_USER"], $env["DB_PASS"], $env["DB_NAME"]);
         } catch (mysqli_sql_exception $e) {
             throw new DatabaseException("Database connection failed: " . $e->getMessage(), $e->getCode(), $e);
         }
+
+        if (array_key_exists("FILE_DIR", $env))
+            $this->file_dir = $env["FILE_DIR"];
     }
 
-    public function query($sql, $params = [], $types = "")
+    public function file_dir()
+    {
+        return $this->file_dir;
+    }
+
+    public function set_sql($sql)
+    {
+        $this->sql = trim(preg_replace('/\s\s+/', ' ', $sql));
+        // error_log("Query: " . $this->sql, 0);
+    }
+
+    public function prepare()
     {
         try {
-            $normalize = trim(preg_replace('/\s\s+/', ' ', $sql));
+            $this->stmt = $this->conn->prepare($this->sql);
+            if ($this->stmt === false) {
+                throw new DatabaseException("Failed to prepare statement for query: $this->sql");
+            }
+        } catch (mysqli_sql_exception $e) {
+            throw new DatabaseException("Query failed: " . $e->getMessage(), $e->getCode(), $e, $this->sql);
+        }
+    }
 
-            // error_log("Query: " . $normalize, 0);
-
+    public function execute($params = [], $types = "")
+    {
+        try {
             if (empty($params)) {
-                $result = $this->conn->query($normalize);
+                $result = $this->conn->query($this->sql);
                 return $result;
             }
 
-            $stmt = $this->conn->prepare($normalize);
-            if ($stmt === false) {
-                throw new DatabaseException("Failed to prepare statement for query: $normalize");
-            }
-
             if (!empty($types)) {
-                $stmt->bind_param($types, ...$params);
+                $this->stmt->bind_param($types, ...$params);
             }
 
-            $stmt->execute();
+            $this->stmt->execute();
 
             // for select, return result set
-            if (stripos($normalize, "SELECT") === 0) {
-                return $stmt->get_result();
+            if (stripos($this->sql, "SELECT") === 0) {
+                return $this->stmt->get_result();
             }
 
             // for update, return affected rows
-            if (stripos($normalize, "UPDATE") === 0 || stripos($normalize, "DELETE") === 0) {
-                return $stmt->affected_rows;
+            if (stripos($this->sql, "UPDATE") === 0 || stripos($this->sql, "DELETE") === 0) {
+                return $this->stmt->affected_rows;
             }
 
             // for update, return insert id or TRUE if no id
-            if (stripos($normalize, "INSERT") === 0) {
+            if (stripos($this->sql, "INSERT") === 0) {
                 return $this->conn->insert_id === 0 ? true : $this->conn->insert_id;
             }
 
             // unknown
             return "IDK";
         } catch (mysqli_sql_exception $e) {
-            throw new DatabaseException("Query failed: " . $e->getMessage(), $e->getCode(), $e, $normalize);
+            throw new DatabaseException("Query failed: " . $e->getMessage(), $e->getCode(), $e, $this->sql);
+        }
+    }
+
+    public function query($sql, $params = [], $types = "")
+    {
+        try {
+            $this->set_sql($sql);
+
+            if (!empty($params)) {
+                $this->prepare();
+            }
+
+            // if (!empty($types)) {
+            //     $this->stmt->bind_param($types, ...$params);
+            // }
+
+            // $this->stmt->execute();
+
+            // // for select, return result set
+            // if (stripos($this->sql, "SELECT") === 0) {
+            //     return $this->stmt->get_result();
+            // }
+
+            // // for update, return affected rows
+            // if (stripos($this->sql, "UPDATE") === 0 || stripos($this->sql, "DELETE") === 0) {
+            //     return $this->stmt->affected_rows;
+            // }
+
+            // // for update, return insert id or TRUE if no id
+            // if (stripos($this->sql, "INSERT") === 0) {
+            //     return $this->conn->insert_id === 0 ? true : $this->conn->insert_id;
+            // }
+
+            // // unknown
+            // return "IDK";
+
+            return $this->execute($params, $types);
+        } catch (mysqli_sql_exception $e) {
+            throw new DatabaseException("Query failed: " . $e->getMessage(), $e->getCode(), $e, $this->sql);
         }
     }
 
